@@ -1,4 +1,5 @@
 import java.util.Arrays;
+
 import utilidades.Leer;
 
 /**
@@ -61,44 +62,44 @@ public class Main {
 			System.out.println("0- Salir");
 			menu = Leer.pedirEntero("introduzca una opcion de menu");
 			switch (menu) {
-			case 1://1- Crear libros.
+			case 1:// 1- Crear libros.
 				int numero = Leer.pedirEntero("Cuantos libros quieres crear");
 				for (int i = 0; i <= libros.length && numero != 0; i++) {
 					if (libros[i] == null && i == libros.length - 1) {
 						libros = Arrays.copyOf(libros, libros.length + 10);
 					} else if (libros[i] == null) {
-						introducirLibros(autores,libros);
+						introducirLibros(autores, libros);
 						numero--;
 					}
 				}
 				break;
-			case 2://2- Modificar libro
+			case 2:// 2- Modificar libro
 				mostrarTitulos(libros);
 				int idlibro = Leer.pedirEntero("selecciona el libro a modificar");
 				modificarLibro(libros, autores, idlibro);
 				break;
-			case 3://3- Modificar autor
+			case 3:// 3- Modificar autor
 				mostrarListaAutores(autores);
 				int i = Leer.pedirEntero("elija el autor a modificar");
 				modificarAutor(autores, i);
 				break;
-			case 4://4- Listado de libros
-					Leer.mostrarEnPantalla(Arrays.toString(libros));
+			case 4:// 4- Listado de libros
+				Leer.mostrarEnPantalla(Arrays.toString(libros));
 
 				break;
-			case 5://5- Listado de autores
+			case 5:// 5- Listado de autores
 				Leer.mostrarEnPantalla(Arrays.toString(autores));
 				break;
-			case 6:  //6- Crear Varios Libros y Autores
-				autores=variosAutores(autores);
-				libros=variosLibros(autores,libros);
+			case 6: // 6- Crear Varios Libros y Autores
+				autores = variosAutores(autores);
+				libros = variosLibros(autores, libros);
 				break;
-			case 0://salir
+			case 0:// salir
 
 				break;
-			case 7://"7- Introducir Autor"
-				 autores=introducirAutor(autores);
-				
+			case 7:// "7- Introducir Autor"
+				autores = introducirAutor(autores);
+
 				break;
 
 			default:
@@ -112,11 +113,11 @@ public class Main {
 		String cadena = Leer.pedirCadena("Busca un libro");
 		for (int i = 0; (i < libros.length) && (libros[i] != null); i++) {
 			if (libros[i].getTitulo().indexOf(cadena) != -1) {
-			Leer.mostrarEnPantalla("hemos encontrado tu libro");
-			Leer.mostrarEnPantalla(i+libros[i].toString());
-			Leer.mostrarEnPantalla("modifica el libro");
-			libros = introducirLibros(autores,libros);
-			Leer.mostrarEnPantalla(i+libros[i].toString());
+				Leer.mostrarEnPantalla("hemos encontrado tu libro");
+				Leer.mostrarEnPantalla(i + libros[i].toString());
+				Leer.mostrarEnPantalla("modifica el libro");
+				libros = introducirLibros(autores, libros);
+				Leer.mostrarEnPantalla(i + libros[i].toString());
 			}
 		}
 	}
@@ -125,67 +126,67 @@ public class Main {
 	 * @param autor
 	 * @param libros
 	 */
-	public static Libro[] modificarLibro(Libro libros[],Autor autores[],int i) {
-			int opc=-1;
-			
-			mostrarTitulos(libros);
-			do {
-				Leer.mostrarEnPantalla("1.Modifica el titulo");
-				Leer.mostrarEnPantalla("2.Modifica el precio");
-				Leer.mostrarEnPantalla("3.Modifica el cantidad");
-				Leer.mostrarEnPantalla("4.Modifica autor");
-				Leer.mostrarEnPantalla("0.salir");
-				opc=Leer.pedirEntero("Que campo quieres modificar");
-				switch (opc) {
-				case 1:
-					libros[i].setTitulo(Leer.pedirCadena("introduce el nuevo nombre"));
-					break;
-				case 2:
-					libros[i].setPrecio(Leer.pedirDouble("introduce el nuevo precio"));
+	public static Libro[] modificarLibro(Libro libros[], Autor autores[], int i) {
+		int opc = -1;
 
-					break;
-				case 3:
-					libros[i].setCantidad(Leer.pedirEntero("introduce el nuevo precio"));
+		mostrarTitulos(libros);
+		do {
+			Leer.mostrarEnPantalla("1.Modifica el titulo");
+			Leer.mostrarEnPantalla("2.Modifica el precio");
+			Leer.mostrarEnPantalla("3.Modifica el cantidad");
+			Leer.mostrarEnPantalla("4.Modifica autor");
+			Leer.mostrarEnPantalla("0.salir");
+			opc = Leer.pedirEntero("Que campo quieres modificar");
+			switch (opc) {
+			case 1:
+				libros[i].setTitulo(Leer.pedirCadena("introduce el nuevo nombre"));
+				break;
+			case 2:
+				libros[i].setPrecio(Leer.pedirDouble("introduce el nuevo precio"));
 
-					break;
-				case 4:
-					int numeroAutores = Leer.pedirEntero("introduce el numero de autores");
-					seleccionarAutor(autores, numeroAutores, libros);
-					libros[i].setAutor(seleccionarAutor(autores, numeroAutores, libros));
-					break;
-				case 0:
-					Leer.mostrarEnPantalla("Fin de modificar Libro");
-					break;
+				break;
+			case 3:
+				libros[i].setCantidad(Leer.pedirEntero("introduce el nuevo precio"));
 
-				default:
-					break;
-				}
-			} while (opc!=0);
-			
+				break;
+			case 4:
+				int numeroAutores = Leer.pedirEntero("introduce el numero de autores");
+				seleccionarAutor(autores, numeroAutores, libros);
+				libros[i].setAutor(seleccionarAutor(autores, numeroAutores, libros));
+				break;
+			case 0:
+				Leer.mostrarEnPantalla("Fin de modificar Libro");
+				break;
+
+			default:
+				break;
+			}
+		} while (opc != 0);
+
 		return libros;
 	}
 
-	public static Autor[] modificarAutor (Autor autores[],int i) {
-		int opc=-1;
+	public static Autor[] modificarAutor(Autor autores[], int i) {
+		int opc = -1;
 		do {
 			Leer.mostrarEnPantalla("1.Modifica el nombre");
 			Leer.mostrarEnPantalla("2.Modifica el email");
 			Leer.mostrarEnPantalla("3.Modifica el sexo");
 			Leer.mostrarEnPantalla("4.Modifica la fecha de nacimiento");
 			Leer.mostrarEnPantalla("0.salir");
-			opc=Leer.pedirEntero("Que campo quieres modificar");
+			opc = Leer.pedirEntero("Que campo quieres modificar");
 			switch (opc) {
 			case 1:
 				Leer.mostrarEnPantalla(autores[i].getNombre());
 				autores[i].setNombre(Leer.pedirCadena("introduce el nuevo nombre"));
-				
+
 				break;
 			case 2:
 				Leer.mostrarEnPantalla(autores[i].getEmail());
 				autores[i].setEmail(Leer.pedirCadena("introduce el nuevo nombre"));
 				break;
 			case 3:
-				Leer.mostrarEnPantalla(autores[i].getSexo()+"");
+				Leer.mostrarEnPantalla(autores[i].getSexo() + "");
 				autores[i].setSexo(Leer.pedirCadena("introduce el nuevo nombre").charAt(0));
 				break;
 			case 4:
@@ -193,87 +194,84 @@ public class Main {
 				autores[i].setFechaNacimiento(IntroducirFecha());
 				break;
 			case 0:
-	
+
 				break;
-	
+
 			default:
 				break;
 			}
-		} while (opc!=0);
-		
+		} while (opc != 0);
+
 		return autores;
 	}
 
 	private static void mostrarTitulos(Libro[] libros) {
-		for (int j = 0; j < libros.length && libros[j]!=null; j++) {
-			Leer.mostrarEnPantalla(j+".- "+libros[j].getTitulo());
+		for (int j = 0; j < libros.length && libros[j] != null; j++) {
+			Leer.mostrarEnPantalla(j + ".- " + libros[j].getTitulo());
 		}
 	}
+
 	private static void mostrarListaAutores(Autor[] autores) {
 		for (int i = 0; i < Autor.getSiguiente(); i++) {
-			System.out.print(i+".-"+autores[i].getNombre()+"\n");
-	}
+			System.out.print(i + ".-" + autores[i].getNombre() + "\n");
+		}
 	}
 
-	public static Libro[] introducirLibros(Autor autores [],Libro libros[]) {
+	public static Libro[] introducirLibros(Autor autores[], Libro libros[]) {
 		String titulo;
 		int numeroAutores;
 		Autor autor[];
 		titulo = Leer.pedirCadena("introduce el titulo");
 		numeroAutores = Leer.pedirEntero("cuantos autores tiene el libro");
 		autor = new Autor[numeroAutores];
-		autor = seleccionarAutor(autores,numeroAutores,libros);
-		libros[Libro.getContador()]=new Libro(titulo,autor, numeroAutores);
-			return libros;
+		autor = seleccionarAutor(autores, numeroAutores, libros);
+		libros[Libro.getContador()] = new Libro(titulo, autor, numeroAutores);
+		return libros;
 	}
-	public static Autor [] seleccionarAutor(Autor autores [],int numeroAutores,Libro libros []) {
+
+	public static Autor[] seleccionarAutor(Autor autores[], int numeroAutores, Libro libros[]) {
 		Autor autor[] = new Autor[numeroAutores];
-			mostrarListaAutores(autores);
-			for (int i = 0; i < numeroAutores; i++) {
-				int idlibro=Leer.pedirEntero("introduce el Id del autor");
-				autor[i] = autores[idlibro];
+		mostrarListaAutores(autores);
+		for (int i = 0; i < numeroAutores; i++) {
+			int idlibro = Leer.pedirEntero("introduce el Id del autor");
+			autor[i] = autores[idlibro];
 		}
 		return autor;
 	}
 
-	public static Autor[] introducirAutor (Autor autores[]){
+	public static Autor[] introducirAutor(Autor autores[]) {
 		String nombre;
 		String email;
 		char sexo;
 		Fecha fechaNacimiento;
 		boolean resultado = false;
-		for (int i = 0; (resultado==false && i < autores.length ); i++) {
-			if (autores[i]==null) {
+		for (int i = 0; (resultado == false && i < autores.length); i++) {
+			if (autores[i] == null) {
 				nombre = Leer.pedirCadena("Introduce el nombre del autor");
 				email = Leer.pedirCadena("email");
-				sexo = Leer.pedirCadena("introduce F o M","[F,M]").charAt(0);
+				sexo = Leer.pedirCadena("introduce F o M", "[F,M]").charAt(0);
 				fechaNacimiento = IntroducirFecha();
-				autores[i]= new Autor(nombre, email, sexo, fechaNacimiento);
+				autores[i] = new Autor(nombre, email, sexo, fechaNacimiento);
 				resultado = true;
 			}
 		}
 		return autores;
 	}
+
 	/**
 	 * @param autor
 	 * @param numeroAutores
 	 */
-	/**public static Autor[] IntroducirAutores() {
-		String nombre;
-		String email;
-		char sexo;
-		Fecha fechaNacimiento;
-		Autor autor[] = new Autor[5];
-		int numeroAutores = Leer.pedirEntero("introduce numero de autores");
-		for (int j = 0; j < numeroAutores; j++) {
-			nombre = Leer.pedirCadena("Introduce el nombre del autor");
-			email = Leer.pedirCadena("email");
-			sexo = Leer.pedirCadena("introduce F o M").charAt(0);
-			fechaNacimiento = IntroducirFecha();
-			autor[j] = new Autor(nombre, email, sexo, fechaNacimiento);
-		}
-		return autor;
-	}*/
+	/**
+	 * public static Autor[] IntroducirAutores() { String nombre; String email; char
+	 * sexo; Fecha fechaNacimiento; Autor autor[] = new Autor[5]; int numeroAutores
+	 * = Leer.pedirEntero("introduce numero de autores"); for (int j = 0; j <
+	 * numeroAutores; j++) { nombre = Leer.pedirCadena("Introduce el nombre del
+	 * autor"); email = Leer.pedirCadena("email"); sexo =
+	 * Leer.pedirCadena("introduce F o M").charAt(0); fechaNacimiento =
+	 * IntroducirFecha(); autor[j] = new Autor(nombre, email, sexo,
+	 * fechaNacimiento); } return autor; }
+	 */
 
 	/**
 	 * @return
@@ -287,39 +285,40 @@ public class Main {
 		return fechaNacimiento;
 	}
 
-	public static Autor[] variosAutores(Autor autores[]) {	
-		
+	public static Autor[] variosAutores(Autor autores[]) {
+
 		for (int i = 0; i < autores.length; i++) {
-			if (i>autores.length/2 && autores[i]!=null) {
-				autores = Arrays.copyOf(autores,autores.length+10);
+			if (i > autores.length / 2 && autores[i] != null) {
+				autores = Arrays.copyOf(autores, autores.length + 10);
 			}
 		}
-		
-		autores[Autor.getSiguiente()] = new Autor("Millan kundera", "milan@fontecabras.es", 'M', new Fecha(24,7,1977));
-		autores[Autor.getSiguiente()] = new Autor("J.R.R Tolkien", "JRR@fontecabras.es", 'F', new Fecha(23,8,1973) );
-		autores[Autor.getSiguiente()] = new Autor("Patrick Süskind", "patrick@fontecabras.es", 'M', new Fecha(24,1,1987));
-		autores[Autor.getSiguiente()] = new Autor("Ken Follett", "patrick@fontecabras.es", 'M', new Fecha(01,3,1957));
-		autores[Autor.getSiguiente()] = new Autor("Irvine Welsh", "patrick@fontecabras.es", 'M', new Fecha(28,2,1965));
 
+		autores[Autor.getSiguiente()] = new Autor("Millan kundera", "milan@fontecabras.es", 'M',
+				new Fecha(24, 7, 1977));
+		autores[Autor.getSiguiente()] = new Autor("J.R.R Tolkien", "JRR@fontecabras.es", 'F', new Fecha(23, 8, 1973));
+		autores[Autor.getSiguiente()] = new Autor("Patrick Süskind", "patrick@fontecabras.es", 'M',
+				new Fecha(24, 1, 1987));
+		autores[Autor.getSiguiente()] = new Autor("Ken Follett", "patrick@fontecabras.es", 'M', new Fecha(01, 3, 1957));
+		autores[Autor.getSiguiente()] = new Autor("Irvine Welsh", "patrick@fontecabras.es", 'M',
+				new Fecha(28, 2, 1965));
 
 		return autores;
 	}
 
-	public static Libro[] variosLibros(Autor autores [], Libro libros[]) {
+	public static Libro[] variosLibros(Autor autores[], Libro libros[]) {
 		for (int i = 0; i < libros.length; i++) {
-			if (i>libros.length/2 && libros[i]!=null) {
-				libros = Arrays.copyOf(libros,libros.length+10);
+			if (i > libros.length / 2 && libros[i] != null) {
+				libros = Arrays.copyOf(libros, libros.length + 10);
 			}
 		}
-		
-		libros[Libro.getContador()] = new Libro("La insoportable levedad del ser", autores [0]);
+
+		libros[Libro.getContador()] = new Libro("La insoportable levedad del ser", autores[0]);
 		libros[Libro.getContador()] = new Libro("El señor de los anillos", autores[1]);
 		libros[Libro.getContador()] = new Libro("El perfume", autores[2]);
 		libros[Libro.getContador()] = new Libro("Trainspotting", autores[4]);
 		libros[Libro.getContador()] = new Libro("El tercer gemelo", autores[3]);
-		libros[Libro.getContador()] = new Libro("Los Pilares de la tierra",autores[3]);
+		libros[Libro.getContador()] = new Libro("Los Pilares de la tierra", autores[3]);
 		libros[Libro.getContador()] = new Libro("En la boca del dragón", autores[3]);
-		
 
 		return libros;
 	}
