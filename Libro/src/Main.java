@@ -277,11 +277,10 @@ public class Main {
 	 * @return
 	 */
 	public static Fecha IntroducirFecha() {
-		Fecha fechaNacimiento;
 		int dia = Leer.pedirEntero("dia");
 		int mes = Leer.pedirEntero("mes");
 		int ano = Leer.pedirEntero("año");
-		fechaNacimiento = new Fecha(dia, mes, ano);
+		Fecha fechaNacimiento = new Fecha(dia, mes, ano);
 		return fechaNacimiento;
 	}
 
