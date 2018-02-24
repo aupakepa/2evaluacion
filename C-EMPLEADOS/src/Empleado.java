@@ -1,3 +1,4 @@
+
 /**Empleado. Clase básica que describe a un empleado. Incluye sus datos
 personales (nombre, apellidos, DNI, dirección) y algunos datos tales como los
 años de antigüedad, teléfono de contacto y su salario.
@@ -13,10 +14,11 @@ public class Empleado {
 	private String apellidos;
 	private String DNI;
 	private String direccion;
-	private Integer antiguedad;
+	private Integer antiguedad;//lo normal es que sea un calculo
 	private Empleado supervisor;
 	private String telefono;
-	private Double salario;
+	private Double salarioBase;
+	private static Integer siguiente=0;
 	
 	/** Constructor sin antiguedad ni supervisor*/
 	public Empleado(String nombre, String apellidos, String dNI, String direccion, String telefono, Double salario) {
@@ -26,14 +28,21 @@ public class Empleado {
 		DNI = dNI;
 		this.direccion = direccion;
 		this.telefono = telefono;
-		this.salario = salario;
+		this.salarioBase = salario;
+		siguiente++;
 		
+	}
+	public static Integer getSiguiente() {
+		return siguiente;
+	}
+	public static void setSiguiente(Integer siguiente) {
+		Empleado.siguiente = siguiente;
 	}
 	@Override
 	public String toString() {
 		return "Empleado [nombre=" + nombre + ", apellidos=" + apellidos + ", DNI=" + DNI + ", direccion=" + direccion
 				+ ", antiguedad=" + antiguedad + ", supervisor=" + supervisor + ", telefono=" + telefono + ", salario="
-				+ salario + "]";
+				+ salarioBase + "]";
 	}
 	public String getNombre() {
 		return nombre;
@@ -77,12 +86,15 @@ public class Empleado {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public Double getSalario() {
-		return salario;
+	public Double getSalarioBase() {
+		return salarioBase;
 	}
-	public void setSalario(Double salario) {
-		this.salario = salario;
+	public void setSalarioBase(Double salario) {
+		this.salarioBase = salario;
 	}
 
-	public void calcularNomnina(Fecha sysdate)
+	public double calcularNomnina() {
+		double nomina=0;
+		return nomina;
+	}
 }
