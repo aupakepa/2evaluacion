@@ -17,7 +17,7 @@ private String despacho;
 private Secretario secretarioAsignado;
 private Coche coche;
 private  Vendedor vendedores [];
-static double incremento = 1.20;
+static double incremento = 0.20;
 
 /**
  * @param nombre
@@ -82,7 +82,7 @@ public void bajaVendedor(int i) {
 	vendedores[i] = null;
 }
 public double calcularNomnina() {
-	double nomina = super.getSalarioBase()*super.getAntiguedad()*incremento;
+	double nomina = super.getSalarioBase()*(1+(super.getAntiguedad()*incremento));
 	return nomina;
 }
 }

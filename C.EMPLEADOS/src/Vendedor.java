@@ -18,8 +18,8 @@ public class Vendedor extends Empleado {
 	private String movil;
 	private String area;
 	private double comision;
-	private Cliente clientes[] = new Cliente[10];
-	static double incremento = 1.10;
+	private Cliente cartera[] = new Cliente[10];
+	static double incremento = 0.10;
 
 	/* constructor por defecto */
 	public Vendedor(String nombre, String apellidos, String dNI, String direccion, String telefono, Double salario,
@@ -29,7 +29,7 @@ public class Vendedor extends Empleado {
 		this.movil = movil;
 		this.area = area;
 		this.comision = comision;
-		this.clientes = clientes;
+		this.cartera = clientes;
 	}
 
 	public Coche getCoche() {
@@ -65,44 +65,62 @@ public class Vendedor extends Empleado {
 	}
 
 	public Cliente[] getClientes() {
-		return clientes;
+		return cartera;
 	}
 
 	public void setClientes(Cliente[] clientes) {
-		this.clientes = clientes;
+		this.cartera = clientes;
 	}
 
 	@Override
 	public String toString() {
 		return "Vendedor [coche=" + coche + ", movil=" + movil + ", area=" + area + ", comision="
-				+ comision + ", clientes=" + Arrays.toString(clientes) + "]"+ super.toString();
+				+ comision + ", clientes=" + Arrays.toString(cartera) + "]"+ super.toString();
 	}
 
-	public void altaCliente() {
-		for (int i = 0; i < clientes.length; i++) {
-			if (clientes[i] == null) {
-				introducirCliente(i);
-			} else if (clientes.length == i && clientes[i] != null) {
-				clientes = Arrays.copyOf(clientes, clientes.length + 5);
+	public void altaCliente(Cliente clientes []) {
+		int j = Cliente.getSiguiente();
+		if (Cliente.getSiguiente()>= clientes.length*0.8) {
+			clientes = Arrays.copyOf(clientes, (int)(clientes.length*1.5));
+		}
+		clientes[Cliente.getSiguiente()] = introducirCliente();
+		clientes[j].setVendedorAsignado(this);
+		boolean nuevo = false;
+		for (int i = 0; i < cartera.length && nuevo != true; i++) {
+			if (cartera[i] == null) {
+				cartera[i] = clientes [j];
+				nuevo = true;
+			} else if (cartera.length == i && cartera[i] != null) {
+				cartera = Arrays.copyOf(cartera, cartera.length + 5);
 			}
 		}
 	}
 
-	public void bajaCliente(int i) {
-		clientes[i] = null;
-		clientes[i].setBaja(true);//no se si tengo que dar de baja el cliente o solo quitarlo del vendedor
+	public void bajaCliente(Cliente cliente, Cliente clientes[]) {
+		for (int j = 0; j < cartera.length; j++) {
+			if (cartera[j].equals(cliente)) {
+				cartera[j]=null;
+			}
+		}
+		for (int j = 0; j < clientes.length; j++) {
+			if (clientes[j].equals(cliente)) {
+				clientes[j].setBaja(true);
+			}
+		}
+		//no se si tengo que dar de baja el cliente o solo quitarlo del vendedor
 	}
 
 	/**
 	 * @param i
 	 */
-	public void introducirCliente(int i) {
+	public Cliente introducirCliente() {
 		String nombre = Leer.pedirCadena("introduzca el nombre del cliente");
-		clientes[i] = new Cliente(nombre);
+		Cliente cliente = new Cliente(nombre);
+		return cliente;
 	}
 
 	public double calcularNomnina() {
-		double nomina = super.getSalarioBase()*super.getAntiguedad()*incremento;
+		double nomina = super.getSalarioBase()*(1+super.getAntiguedad()*incremento);
 		return nomina;
 	}
 }

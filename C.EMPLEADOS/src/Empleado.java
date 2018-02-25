@@ -14,10 +14,10 @@ public class Empleado {
 	private String apellidos;
 	private String DNI;
 	private String direccion;
-	private Integer antiguedad;//lo normal es que sea un calculo
+	private Integer antiguedad = 2;//lo normal es que sea un calculo
 	private Empleado supervisor;
 	private String telefono;
-	private Double salarioBase;
+	private Double salarioBase = 1000.0;
 	private static Integer siguiente=0;
 	
 	/** Constructor sin antiguedad ni supervisor*/

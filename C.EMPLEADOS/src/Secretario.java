@@ -7,7 +7,7 @@ public class Secretario extends Empleado{
 	
 private String despacho;
 private String fax;
-static double incremento=1.05;
+static double incremento=0.05;
 
 public String getDespacho() {
 	return despacho;
@@ -34,7 +34,7 @@ public Secretario(String nombre, String apellidos, String dNI, String direccion,
 	this.fax = fax;
 }
 public double calcularNomnina() {
-	double nomina = super.getSalarioBase()*super.getAntiguedad()*incremento;
+	double nomina = super.getSalarioBase()*(1+super.getAntiguedad()*incremento);
 	return nomina;
 }
 

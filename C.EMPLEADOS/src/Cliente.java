@@ -1,18 +1,25 @@
 
 public class Cliente {
 private String nombre;
-static Integer siguiente = 43000001;
+static Integer siguiente = 0;
 private Integer numero;
 private boolean baja ;
+private Vendedor vendedorAsignado;
 /**
  * @param nombre
  * @param numero
  */
 public Cliente(String nombre) {
 	this.nombre = nombre;
-	this.numero = siguiente;
+	this.numero = 43000000+siguiente;
 	this.baja = false;
 	siguiente++;
+}
+public Vendedor getVendedorAsignado() {
+	return vendedorAsignado;
+}
+public void setVendedorAsignado(Vendedor vendedorAsignado) {
+	this.vendedorAsignado = vendedorAsignado;
 }
 public boolean isBaja() {
 	return baja;
